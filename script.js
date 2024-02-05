@@ -1,57 +1,47 @@
-let currentPlayer = "X";
-let boardArray = ["", "", "", "", "", "", "", "", ""];
+var currentPlayer = "circle";
+var spielfeld = [
+  ["", "", ""],
+  ["", "", ""],
+  ["", "", ""],
+];
 
-function renderBoard() {
-  const boardElement = document.getElementById("content");
-  boardElement.innerHTML = "";
+function renderSpielfeld() {
+  var contentDiv = document.getElementById("content");
+  var tableHTML = "<table>";
 
-  for (let i = 0; i < boardArray.length; i++) {
-    const cellElement = document.createElement("div");
-    cellElement.className = "cell";
-    cellElement.onclick = () => handleCellClick(i);
+  for (var i = 0; i < 3; i++) {
+    tableHTML += "<tr>";
 
-    const symbolElement =
-      boardArray[i] === "X"
-        ? document.getElementById("x-svg").cloneNode(true)
-        : boardArray[i] === "O"
-        ? document.getElementById("o-svg").cloneNode(true)
-        : null;
-
-    if (symbolElement) {
-      symbolElement.style.display = "block";
-      cellElement.appendChild(symbolElement);
+    for (var j = 0; j < 3; j++) {
+      tableHTML += '<td onclick="cellClick(' + i + "," + j + ')">';
+      if (spielfeld[i][j] === "circle") {
+        tableHTML +=
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="#fff" stroke-width="6" fill="none"/></svg>';
+      } else if (spielfeld[i][j] === "cross") {
+        tableHTML +=
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><line x1="20" y1="20" x2="80" y2="80" stroke="#fff" stroke-width="6"/><line x1="80" y1="20" x2="20" y2="80" stroke="#fff" stroke-width="6"/></svg>';
+      }
+      tableHTML += "</td>";
     }
 
-    boardElement.appendChild(cellElement);
+    tableHTML += "</tr>";
+  }
+
+  tableHTML += "</table>";
+  contentDiv.innerHTML = tableHTML;
+}
+
+function cellClick(row, col) {
+  if (spielfeld[row][col] === "") {
+    // Überprüfen, ob das Feld leer ist
+    spielfeld[row][col] = currentPlayer;
+
+    renderSpielfeld();
+
+    // Wechsle den Spieler
+    currentPlayer = currentPlayer === "circle" ? "cross" : "circle";
   }
 }
 
-function handleCellClick(index) {
-  if (boardArray[index] === "") {
-    boardArray[index] = currentPlayer;
-    renderBoard();
-
-    if (checkWinner() || checkTie()) {
-      alert("Game Over!");
-      resetGame();
-    } else {
-      currentPlayer = currentPlayer === "X" ? "O" : "X";
-    }
-  }
-}
-
-function checkWinner() {
-  return false;
-}
-
-function checkTie() {
-  return false;
-}
-
-function resetGame() {
-  boardArray = ["", "", "", "", "", "", "", "", ""];
-  currentPlayer = "X";
-  renderBoard();
-}
-
-renderBoard();
+// Aufruf der Renderfunktion
+renderSpielfeld();

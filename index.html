@@ -4,37 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Spielfeld</title>
 </head>
 
 <body>
-    <h1>Tic Tac Toe</h1>
-    <div class="position">
-        <div id="content" class="board"></div>
-    </div>
-
-    <svg id="x-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="symbol">
-        <line x1="20" y1="20" x2="80" y2="80" stroke="white" stroke-width="10" />
-        <line x1="80" y1="20" x2="20" y2="80" stroke="white" stroke-width="10" />
-    </svg>
-
-    <svg id="o-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="symbol">
-        <circle cx="50" cy="50" r="30" stroke="white" stroke-width="10" fill="none" />
-        <defs>
-            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="3" result="glow" />
-                <feMerge>
-                    <feMergeNode in="glow" />
-                    <feMergeNode in="glow" />
-                    <feMergeNode in="glow" />
-                </feMerge>
-            </filter>
-        </defs>
-    </svg>
-
-
-    <script src="./script.js"></script>
+    <div id="content"></div>
+    <script src="script.js"></script>
 </body>
 
 </html>
