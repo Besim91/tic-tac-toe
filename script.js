@@ -1,3 +1,5 @@
+const clickSound = new Audio("./audio/blaster.mp3");
+
 var currentPlayer = "Besim Mustafi";
 var spielerDiv = document.getElementById("player");
 var spielfeld = [
@@ -7,7 +9,7 @@ var spielfeld = [
 ];
 
 function renderSpielfeld() {
-  spielerDiv.innerHTML = "Spieler " + currentPlayer + " ist am Zug";
+  spielerDiv.innerHTML = currentPlayer + "<br> ist am Zug";
 
   var contentDiv = document.getElementById("content");
   var tableHTML = "<table>";
@@ -46,6 +48,7 @@ function cellClick(row, col) {
     spielfeld[row][col] = currentPlayer;
     currentPlayer =
       currentPlayer === "Besim Mustafi" ? "Elon Musk" : "Besim Mustafi";
+    clickSound.play();
     renderSpielfeld();
     checkWinner();
   }
@@ -144,7 +147,7 @@ function announceWinner(winner) {
   var playerDiv = document.getElementById("player");
   if (winner !== "Unentschieden") {
     setTimeout(function () {
-      playerDiv.innerHTML = "Spieler " + winner + " hat gewonnen!";
+      playerDiv.innerHTML = winner + " hat gewonnen!";
       playerDiv.classList.add("winner");
     }, 300);
   } else {
@@ -169,11 +172,18 @@ function restartGame() {
     ["", "", ""],
     ["", "", ""],
   ];
+
   // Entferne alle Linien
   var lines = document.getElementsByClassName("line");
   while (lines.length > 0) {
     lines[0].parentNode.removeChild(lines[0]);
   }
+
+  // Entferne die Gewinnerklasse und setze den Text zurück
+  var playerDiv = document.getElementById("player");
+  playerDiv.classList.remove("winner");
+  playerDiv.innerHTML = "Spieler " + currentPlayer + " ist am Zug";
+
   renderSpielfeld(); // Rendere das Spielfeld neu
 }
 

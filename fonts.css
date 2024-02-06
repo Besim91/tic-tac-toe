@@ -1,0 +1,18 @@
+/* alumni-sans-collegiate-one-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Alumni Sans Collegiate One";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/alumni-sans-collegiate-one-v5-latin-regular.woff2")
+    format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* aladin-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Aladin";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/aladin-v24-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
