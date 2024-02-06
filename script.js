@@ -1,4 +1,5 @@
 const clickSound = new Audio("./audio/blaster.mp3");
+const btnSound = new Audio("./audio/button.mp3");
 
 var currentPlayer = "Besim Mustafi";
 var spielerDiv = document.getElementById("player");
@@ -44,14 +45,27 @@ function renderSpielfeld() {
 }
 
 function cellClick(row, col) {
-  if (spielfeld[row][col] === "") {
+  if (spielfeld[row][col] === "" && !isGameEnded()) {
     spielfeld[row][col] = currentPlayer;
     currentPlayer =
       currentPlayer === "Besim Mustafi" ? "Elon Musk" : "Besim Mustafi";
+
+    // Lade das Audiodatei-Objekt neu
+    clickSound.load();
+
+    // Spiele den Klicksound ab
     clickSound.play();
+
     renderSpielfeld();
     checkWinner();
   }
+}
+
+function isGameEnded() {
+  return (
+    document.getElementById("player").innerHTML !==
+    currentPlayer + "<br> ist am Zug"
+  );
 }
 
 function checkWinner() {
@@ -133,11 +147,12 @@ function drawLine(x1, y1, x2, y2) {
   line.style.position = "absolute";
   line.style.width = length + "px";
   line.style.height = lineWidth + "px";
-  line.style.backgroundColor = "black";
+  line.style.backgroundColor = "red";
   line.style.left = startX + contentRect.left + "px"; // Berücksichtige die Position des Inhaltsbereichs
   line.style.top = startY + contentRect.top + "px"; // Berücksichtige die Position des Inhaltsbereichs
   line.style.transformOrigin = "left center"; // Drehe um den Anfang der Linie
   line.style.transform = "rotate(" + angle + "deg)";
+  line.style.filter = "drop-shadow(0px 0px 6px white)";
 
   var contentDiv = document.getElementById("content");
   contentDiv.appendChild(line);
@@ -163,9 +178,16 @@ function announceWinner(winner) {
     ["", "", ""],
     ["", "", ""],
   ];
+
+  document.getElementById(`btn-restart`).classList.add("btn-restart-free");
+  document.getElementById(`btn-restart`).disabled = false;
 }
 
 function restartGame() {
+  if (!document.getElementById("btn-restart").disabled) {
+    btnSound.play();
+  }
+
   currentPlayer = "Besim Mustafi";
   spielfeld = [
     ["", "", ""],
@@ -183,6 +205,8 @@ function restartGame() {
   var playerDiv = document.getElementById("player");
   playerDiv.classList.remove("winner");
   playerDiv.innerHTML = "Spieler " + currentPlayer + " ist am Zug";
+
+  document.getElementById(`btn-restart`).classList.remove("btn-restart-free");
 
   renderSpielfeld(); // Rendere das Spielfeld neu
 }

@@ -128,12 +128,13 @@ td.glowing svg {
   filter: drop-shadow(0 0 1px grey);
 }
 
-.btn-restart:hover {
+.btn-restart-free {
   background-color: white;
   color: blue;
   filter: drop-shadow(0 0 5px violet);
   font-weight: bold;
   border: solid 1px violet;
+  cursor: pointer;
 }
 
 #myVideo {
