@@ -143,7 +143,6 @@ function drawLine(x1, y1, x2, y2) {
 function announceWinner(winner) {
   if (winner !== "Unentschieden") {
     setTimeout(function () {
-      alert("Spieler " + winner + " hat gewonnen!");
       spielerDiv.innerHTML = "Spieler " + winner + " hat gewonnen!";
     }, 300);
   } else {
@@ -159,6 +158,21 @@ function announceWinner(winner) {
     ["", "", ""],
     ["", "", ""],
   ];
+}
+
+function restartGame() {
+  currentPlayer = "Besim Mustafi";
+  spielfeld = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ];
+  // Entferne alle Linien
+  var lines = document.getElementsByClassName("line");
+  while (lines.length > 0) {
+    lines[0].parentNode.removeChild(lines[0]);
+  }
+  renderSpielfeld(); // Rendere das Spielfeld neu
 }
 
 // Aufruf der Renderfunktion
