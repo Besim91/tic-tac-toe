@@ -52,7 +52,92 @@ function cellClick(row, col) {
 }
 
 function checkWinner() {
-  // ... (unchanged)
+  for (var i = 0; i < 3; i++) {
+    if (
+      spielfeld[i][0] === spielfeld[i][1] &&
+      spielfeld[i][1] === spielfeld[i][2] &&
+      spielfeld[i][0] !== ""
+    ) {
+      drawLine(i, 0, i, 2);
+      announceWinner(spielfeld[i][0]);
+      return;
+    }
+
+    if (
+      spielfeld[0][i] === spielfeld[1][i] &&
+      spielfeld[1][i] === spielfeld[2][i] &&
+      spielfeld[0][i] !== ""
+    ) {
+      drawLine(0, i, 2, i);
+      announceWinner(spielfeld[0][i]);
+      return;
+    }
+  }
+
+  if (
+    spielfeld[0][0] === spielfeld[1][1] &&
+    spielfeld[1][1] === spielfeld[2][2] &&
+    spielfeld[0][0] !== ""
+  ) {
+    drawLine(0, 0, 2, 2);
+    announceWinner(spielfeld[0][0]);
+    return;
+  }
+
+  if (
+    spielfeld[0][2] === spielfeld[1][1] &&
+    spielfeld[1][1] === spielfeld[2][0] &&
+    spielfeld[0][2] !== ""
+  ) {
+    drawLine(0, 2, 2, 0);
+    announceWinner(spielfeld[0][2]);
+    return;
+  }
+
+  var draw = true;
+  for (var i = 0; i < 3; i++) {
+    for (var j = 0; j < 3; j++) {
+      if (spielfeld[i][j] === "") {
+        draw = false;
+        break;
+      }
+    }
+  }
+
+  if (draw) {
+    announceWinner("Unentschieden");
+  }
+}
+
+function drawLine(x1, y1, x2, y2) {
+  var contentRect = document.getElementById("content").getBoundingClientRect();
+  var cellSize = 100; // Annahme: jede Zelle ist 100x100 Pixel groß
+  var lineWidth = 5;
+
+  var startX = y1 * cellSize + cellSize / 2;
+  var startY = x1 * cellSize + cellSize / 2;
+
+  var endX = y2 * cellSize + cellSize / 2;
+  var endY = x2 * cellSize + cellSize / 2;
+
+  var length = Math.sqrt(
+    Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2)
+  );
+  var angle = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI);
+
+  var line = document.createElement("div");
+  line.classList.add("line");
+  line.style.position = "absolute";
+  line.style.width = length + "px";
+  line.style.height = lineWidth + "px";
+  line.style.backgroundColor = "black";
+  line.style.left = startX + contentRect.left + "px"; // Berücksichtige die Position des Inhaltsbereichs
+  line.style.top = startY + contentRect.top + "px"; // Berücksichtige die Position des Inhaltsbereichs
+  line.style.transformOrigin = "left center"; // Drehe um den Anfang der Linie
+  line.style.transform = "rotate(" + angle + "deg)";
+
+  var contentDiv = document.getElementById("content");
+  contentDiv.appendChild(line);
 }
 
 function announceWinner(winner) {

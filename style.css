@@ -5,7 +5,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #ddd; /* Hintergrundfarbe des gesamten Spielfelds */
+  background-color: #ddd;
 }
 
 #content {
@@ -20,28 +20,27 @@ body {
 
 table {
   border-collapse: collapse;
-  width: 300px; /* Feste Breite für das Spielfeld */
-  border: 2px solid #ddd; /* Äußerer Rahmen um das gesamte Spielfeld entfernt */
+  width: 300px;
+  border: 2px solid #ddd;
 }
 
 td {
-  border: 1px solid #fff; /* Weiße Linien zwischen den Zellen */
-  width: 100px; /* Feste Breite für die Zellen */
-  height: 100px; /* Feste Höhe für die Zellen */
+  border: 1px solid #fff;
+  width: 100px;
+  height: 100px;
   text-align: center;
-  background-color: #ccc; /* Graue Hintergrundfarbe der Zellen */
-  cursor: pointer; /* Ändert den Cursor beim Überfahren, um zu zeigen, dass es anklickbar ist */
+  background-color: #ccc;
+  cursor: pointer;
   position: relative;
 }
 
 td svg {
-  width: 80%; /* Breite der Symbole auf 80% der Zellenbreite */
-  height: 80%; /* Höhe der Symbole auf 80% der Zellenhöhe */
-  margin: 10%; /* Zentriert das Symbol innerhalb der Zelle */
-  transition: fill 0.3s ease-in-out, opacity 0.5s ease-in-out; /* Sanfter Übergang für die Füllfarbe und die Opazität */
+  width: 80%;
+  height: 80%;
+  margin: 10%;
+  transition: fill 0.3s ease-in-out, opacity 0.5s ease-in-out;
 }
 
-/* Animation für den Leuchteffekt */
 @keyframes glow {
   0%,
   100% {
@@ -56,33 +55,30 @@ td.glowing svg {
   animation: glow 1s infinite;
 }
 
-/* Farben für Kreis und Kreuz */
 .circle {
-  filter: drop-shadow(
-    0px 0px 5px red
-  ); /* Schatten nur auf das Symbol anwenden */
+  filter: drop-shadow(0px 0px 5px red);
 }
 
 .cross {
-  filter: drop-shadow(
-    0px 0px 5px green
-  ); /* Schatten nur auf das Symbol anwenden */
+  filter: drop-shadow(0px 0px 5px green);
 }
 
-/* Animation für das Erscheinen */
 @keyframes appear {
   0% {
-    opacity: 0; /* Starte mit 0 Opazität */
-    transform: scale(0); /* Starte mit einer Skalierung von 0 (unsichtbar) */
+    opacity: 0;
+    transform: scale(0);
   }
   50% {
-    opacity: 1; /* Erreiche 50% Opazität in der Mitte der Animation */
-    transform: scale(
-      1.2
-    ); /* Vergrößere das Symbol leicht in der Mitte der Animation */
+    opacity: 1;
+    transform: scale(1.2);
   }
   100% {
-    opacity: 1; /* Ende mit voller Opazität */
-    transform: scale(1); /* Erreiche eine Skalierung von 1 (normal sichtbar) */
+    opacity: 1;
+    transform: scale(1);
   }
+}
+
+.line {
+  position: absolute;
+  background-color: black; /* Überprüfen Sie die Farbe */
 }
