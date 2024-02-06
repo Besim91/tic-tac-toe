@@ -26,10 +26,10 @@ function renderSpielfeld() {
         '">';
       if (spielfeld[i][j] === "Besim Mustafi") {
         tableHTML +=
-          '<svg class="circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="transparent"/></svg>';
+          '<svg class="circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="white" stroke-width="3" fill="transparent"/></svg>';
       } else if (spielfeld[i][j] === "Elon Musk") {
         tableHTML +=
-          '<svg class="cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><line x1="20" y1="20" x2="80" y2="80" stroke="black" stroke-width="3"/><line x1="80" y1="20" x2="20" y2="80" stroke="black" stroke-width="3"/></svg>';
+          '<svg class="cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><line x1="20" y1="20" x2="80" y2="80" stroke="white" stroke-width="3"/><line x1="80" y1="20" x2="20" y2="80" stroke="white" stroke-width="3"/></svg>';
       }
       tableHTML += "</td>";
     }
@@ -141,14 +141,16 @@ function drawLine(x1, y1, x2, y2) {
 }
 
 function announceWinner(winner) {
+  var playerDiv = document.getElementById("player");
   if (winner !== "Unentschieden") {
     setTimeout(function () {
-      spielerDiv.innerHTML = "Spieler " + winner + " hat gewonnen!";
+      playerDiv.innerHTML = "Spieler " + winner + " hat gewonnen!";
+      playerDiv.classList.add("winner");
     }, 300);
   } else {
     setTimeout(function () {
-      alert("Das Spiel endet unentschieden!");
-      spielerDiv.innerHTML = "Das Spiel endet unentschieden!";
+      playerDiv.innerHTML = "Das Spiel endet unentschieden!";
+      playerDiv.classList.remove("winner");
     }, 300);
   }
 

@@ -5,7 +5,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #ddd;
+  background-color: rgb(52, 53, 65);
 }
 
 #content {
@@ -21,15 +21,15 @@ body {
 table {
   border-collapse: collapse;
   width: 300px;
-  border: 2px solid #ddd;
+  border: 1px solid transparent; /* Setze den Rahmen auf transparent */
 }
 
 td {
-  border: 1px solid #fff;
+  border: 1px solid #fff; /* Behalte die inneren Rahmen der Zellen bei */
   width: 100px;
   height: 100px;
   text-align: center;
-  background-color: #ccc;
+  background-color: rgb(52, 53, 65);
   cursor: pointer;
   position: relative;
 }
@@ -78,7 +78,28 @@ td.glowing svg {
   }
 }
 
-.line {
-  position: absolute;
-  background-color: black; /* Überprüfen Sie die Farbe */
+#player.winner {
+  font-size: 40px;
+  color: green;
+}
+
+.btn-restart {
+  background-color: transparent;
+  background-color: transparent;
+  margin-top: 32px;
+  outline: none;
+  border: solid 2px white;
+  border-radius: 25%;
+  padding: 8px;
+  width: 150px;
+  color: white;
+  filter: drop-shadow(0 0 1px grey);
+}
+
+.btn-restart:hover {
+  background-color: white;
+  color: blue;
+  filter: drop-shadow(0 0 5px violet);
+  font-weight: bold;
+  border: solid 1px violet;
 }
