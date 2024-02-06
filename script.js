@@ -9,6 +9,9 @@ var spielfeld = [
   ["", "", ""],
 ];
 
+var playerOneScore = 0;
+var playerTwoScore = 0;
+
 function renderSpielfeld() {
   spielerDiv.innerHTML = currentPlayer + "<br> ist am Zug";
 
@@ -50,10 +53,7 @@ function cellClick(row, col) {
     currentPlayer =
       currentPlayer === "Besim Mustafi" ? "Elon Musk" : "Besim Mustafi";
 
-    // Lade das Audiodatei-Objekt neu
     clickSound.load();
-
-    // Spiele den Klicksound ab
     clickSound.play();
 
     renderSpielfeld();
@@ -128,7 +128,7 @@ function checkWinner() {
 
 function drawLine(x1, y1, x2, y2) {
   var contentRect = document.getElementById("content").getBoundingClientRect();
-  var cellSize = 100; // Annahme: jede Zelle ist 100x100 Pixel groß
+  var cellSize = 100;
   var lineWidth = 5;
 
   var startX = y1 * cellSize + cellSize / 2;
@@ -148,9 +148,9 @@ function drawLine(x1, y1, x2, y2) {
   line.style.width = length + "px";
   line.style.height = lineWidth + "px";
   line.style.backgroundColor = "red";
-  line.style.left = startX + contentRect.left + "px"; // Berücksichtige die Position des Inhaltsbereichs
-  line.style.top = startY + contentRect.top + "px"; // Berücksichtige die Position des Inhaltsbereichs
-  line.style.transformOrigin = "left center"; // Drehe um den Anfang der Linie
+  line.style.left = startX + contentRect.left + "px";
+  line.style.top = startY + contentRect.top + "px";
+  line.style.transformOrigin = "left center";
   line.style.transform = "rotate(" + angle + "deg)";
   line.style.filter = "drop-shadow(0px 0px 6px white)";
 
@@ -161,6 +161,17 @@ function drawLine(x1, y1, x2, y2) {
 function announceWinner(winner) {
   var playerDiv = document.getElementById("player");
   if (winner !== "Unentschieden") {
+    if (winner === "Besim Mustafi") {
+      playerOneScore++;
+      document.getElementById(
+        "playerOne"
+      ).innerHTML = `Besim Mustafi <br> ${playerOneScore}`;
+    } else if (winner === "Elon Musk") {
+      playerTwoScore++;
+      document.getElementById(
+        "playerTwo"
+      ).innerHTML = `Besim Mustafi <br> ${playerTwoScore}`;
+    }
     setTimeout(function () {
       playerDiv.innerHTML = winner + " hat gewonnen!";
       playerDiv.classList.add("winner");
@@ -195,21 +206,18 @@ function restartGame() {
     ["", "", ""],
   ];
 
-  // Entferne alle Linien
   var lines = document.getElementsByClassName("line");
   while (lines.length > 0) {
     lines[0].parentNode.removeChild(lines[0]);
   }
 
-  // Entferne die Gewinnerklasse und setze den Text zurück
   var playerDiv = document.getElementById("player");
   playerDiv.classList.remove("winner");
   playerDiv.innerHTML = "Spieler " + currentPlayer + " ist am Zug";
 
   document.getElementById(`btn-restart`).classList.remove("btn-restart-free");
 
-  renderSpielfeld(); // Rendere das Spielfeld neu
+  renderSpielfeld();
 }
 
-// Aufruf der Renderfunktion
 renderSpielfeld();
