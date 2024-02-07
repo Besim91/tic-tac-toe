@@ -170,7 +170,7 @@ function announceWinner(winner) {
       playerTwoScore++;
       document.getElementById(
         "playerTwo"
-      ).innerHTML = `Besim Mustafi <br> ${playerTwoScore}`;
+      ).innerHTML = `Elon Musk <br> ${playerTwoScore}`;
     }
     setTimeout(function () {
       playerDiv.innerHTML = winner + " hat gewonnen!";
